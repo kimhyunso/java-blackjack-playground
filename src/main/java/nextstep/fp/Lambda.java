@@ -53,4 +53,10 @@ public class Lambda {
         }
         return total;
     }
+
+    public static int sumAllLamdba(List<Integer> numbers) {
+        return numbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
 }
