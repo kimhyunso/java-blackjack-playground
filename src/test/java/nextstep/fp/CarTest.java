@@ -1,5 +1,6 @@
 package nextstep.fp;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,4 +29,23 @@ public class CarTest {
         });
         assertThat(actual).isEqualTo(new Car("pobi", 0));
     }
+
+    @DisplayName("자동차 이동 테스트 (람다 버전)")
+    @Test
+    void 이동_람다() {
+        Car car = new Car("pobi", 0);
+        Car actual = car.move(() -> true);
+
+        assertThat(actual).isEqualTo(new Car("pobi", 1));
+    }
+
+    @DisplayName("자동차 정지 테스트 (람다 버전)")
+    @Test
+    void 정지_람다() {
+        Car car = new Car("pobi", 0);
+        Car actual = car.move(() -> false);
+
+        assertThat(actual).isEqualTo(new Car("pobi", 0));
+    }
+
 }
