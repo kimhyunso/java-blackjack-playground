@@ -32,7 +32,7 @@ public class StreamStudyTest {
 
     @Test
     public void printLongestWordTop100() throws Exception {
-        StreamStudy.printLongestWordTop100();
+        StreamStudy.printLongestWordTop100((word) -> word.length() > 12);
     }
 
     @Test
