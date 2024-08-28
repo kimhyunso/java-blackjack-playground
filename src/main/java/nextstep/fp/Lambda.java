@@ -59,4 +59,12 @@ public class Lambda {
                 .mapToInt(Integer::intValue)
                 .sum();
     }
+
+    public static int sumLamdba(SumStrategy sumStrategy, List<Integer> numbers) {
+        return numbers.stream()
+                .filter(sumStrategy::isCondition)
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
 }
