@@ -44,7 +44,7 @@ public class StreamStudyTest {
     @DisplayName("numbers 배열 안에 있는 요소들을 2배로 만드는 기능")
     @Test
     public void mapStrategy() throws Exception {
-        List<Integer> doubleNumbers = StreamStudy.doubleNumbersStrategy(numbers, (x) -> x * 2);
+        List<Integer> doubleNumbers = StreamStudy.doubleNumbersRefactor(numbers);
         List<Integer> compareNumbers = Arrays.asList(2, 4, 6, 8, 10, 12);
         assertThat(doubleNumbers).isEqualTo(compareNumbers);
         System.out.println(doubleNumbers);
@@ -60,7 +60,7 @@ public class StreamStudyTest {
     @Test
     @DisplayName("numbers 요소들의 sum을 구하는 기능 Strategy")
     void sumAllStrategy() {
-        long sum = StreamStudy.sumAllStrategy(numbers, (x, y) -> x + y);
+        long sum = StreamStudy.sumAllRefactor(numbers);
         assertThat(sum).isEqualTo(21);
     }
 
@@ -75,9 +75,10 @@ public class StreamStudyTest {
     }
 
     @Test
+    @DisplayName("List에 담긴 모든 숫자 중 3보다 큰 숫자를 2배 한 후 모든 값의 합을 구하는 기능")
     public void sumOverThreeAndDouble() throws Exception {
         numbers = Arrays.asList(3, 1, 6, 2, 4, 8);
-        long sum = StreamStudy.sumOverThreeAndDouble(numbers);
+        long sum = StreamStudy.sumOverThreeAndDouble(numbers, (x) -> x > 3);
         assertThat(sum).isEqualTo(36);
     }
 

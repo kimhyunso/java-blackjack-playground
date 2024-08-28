@@ -45,20 +45,28 @@ public class StreamStudy {
         return numbers.stream().map(x -> 2 * x).collect(Collectors.toList());
     }
 
-    public static List<Integer> doubleNumbersStrategy(List<Integer> numbers, MapStrategy mapStrategy) {
-        return numbers.stream().map(mapStrategy::confidence).collect(Collectors.toList());
+    public static List<Integer> doubleNumbersRefactor(List<Integer> numbers) {
+        return numbers.stream().map(StreamStudy::multipleNumber).collect(Collectors.toList());
     }
 
     public static long sumAll(List<Integer> numbers) {
         return numbers.stream().reduce(0, (x, y) -> x + y);
     }
 
-    public static long sumAllStrategy(List<Integer> numbers, SumAllStrategy sumAllStrategy) {
+    public static long sumAllRefactor(List<Integer> numbers) {
         // reduce의 첫번째 요소 identify: 0부터 누적하겠다는 의미
-        return numbers.stream().reduce(0, sumAllStrategy::confidence);
+        return numbers.stream().reduce(0, Integer::sum);
     }
 
-    public static long sumOverThreeAndDouble(List<Integer> numbers) {
-        return 0;
+    public static long sumOverThreeAndDouble(List<Integer> numbers, SumStrategy sumStrategy) {
+        return numbers.stream()
+                .filter(sumStrategy::isCondition)
+                .mapToInt(StreamStudy::multipleNumber)
+                .reduce(0, Integer::sum);
     }
+
+    private static int multipleNumber(int x) {
+        return x * 2;
+    }
+
 }
