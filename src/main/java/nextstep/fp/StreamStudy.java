@@ -22,6 +22,17 @@ public class StreamStudy {
         return count;
     }
 
+    public static long countWordsFilter(WordStrategy wordStrategy) throws IOException {
+        String contents = new String(Files.readAllBytes(Paths
+                .get("src/main/resources/fp/war-and-peace.txt")), StandardCharsets.UTF_8);
+        List<String> words = Arrays.asList(contents.split("[\\P{L}]+"));
+
+        return words.stream()
+                .mapToLong(String::length)
+                .filter(wordStrategy::confidence)
+                .count();
+    }
+
     public static void printLongestWordTop100() throws IOException {
         String contents = new String(Files.readAllBytes(Paths
                 .get("src/main/resources/fp/war-and-peace.txt")), StandardCharsets.UTF_8);
@@ -34,8 +45,17 @@ public class StreamStudy {
         return numbers.stream().map(x -> 2 * x).collect(Collectors.toList());
     }
 
+    public static List<Integer> doubleNumbersStrategy(List<Integer> numbers, MapStrategy mapStrategy) {
+        return numbers.stream().map(mapStrategy::confidence).collect(Collectors.toList());
+    }
+
     public static long sumAll(List<Integer> numbers) {
         return numbers.stream().reduce(0, (x, y) -> x + y);
+    }
+
+    public static long sumAllStrategy(List<Integer> numbers, SumAllStrategy sumAllStrategy) {
+        // reduce의 첫번째 요소 identify: 0부터 누적하겠다는 의미
+        return numbers.stream().reduce(0, sumAllStrategy::confidence);
     }
 
     public static long sumOverThreeAndDouble(List<Integer> numbers) {

@@ -1,6 +1,7 @@
 package nextstep.fp;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -22,6 +23,13 @@ public class StreamStudyTest {
         System.out.println("result : " + result);
     }
 
+    @DisplayName("stream, filter를 사용하여 글자의 개수를 새는 기능")
+    @Test
+    void countWordStreamFilter() throws Exception {
+        long result = StreamStudy.countWordsFilter((length) -> length > 12);
+        System.out.println("result : " + result);
+    }
+
     @Test
     public void printLongestWordTop100() throws Exception {
         StreamStudy.printLongestWordTop100();
@@ -33,10 +41,37 @@ public class StreamStudyTest {
         doubleNumbers.forEach(System.out::println);
     }
 
+    @DisplayName("numbers 배열 안에 있는 요소들을 2배로 만드는 기능")
+    @Test
+    public void mapStrategy() throws Exception {
+        List<Integer> doubleNumbers = StreamStudy.doubleNumbersStrategy(numbers, (x) -> x * 2);
+        List<Integer> compareNumbers = Arrays.asList(2, 4, 6, 8, 10, 12);
+        assertThat(doubleNumbers).isEqualTo(compareNumbers);
+        System.out.println(doubleNumbers);
+    }
+
+
     @Test
     public void sumAll() throws Exception {
         long sum = StreamStudy.sumAll(numbers);
         assertThat(sum).isEqualTo(21);
+    }
+
+    @Test
+    @DisplayName("numbers 요소들의 sum을 구하는 기능 Strategy")
+    void sumAllStrategy() {
+        long sum = StreamStudy.sumAllStrategy(numbers, (x, y) -> x + y);
+        assertThat(sum).isEqualTo(21);
+    }
+
+    @Test
+    @DisplayName("numbers 요소들의 sum을 구하는 기능 reduce 테스트")
+    void sumAllReduce() {
+        long sum = numbers.stream()
+                .peek(System.out::println)
+                .reduce(10, (x, y) -> x + y);
+
+        assertThat(sum).isEqualTo(31);
     }
 
     @Test
@@ -45,4 +80,6 @@ public class StreamStudyTest {
         long sum = StreamStudy.sumOverThreeAndDouble(numbers);
         assertThat(sum).isEqualTo(36);
     }
+
+
 }

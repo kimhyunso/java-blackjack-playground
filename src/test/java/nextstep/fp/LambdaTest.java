@@ -73,5 +73,4 @@ public class LambdaTest {
         assertThat(sum).isEqualTo(15);
     }
 
-
 }
