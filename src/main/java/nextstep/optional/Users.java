@@ -20,4 +20,13 @@ public class Users {
         }
         return DEFAULT_USER;
     }
+
+    User getUserToStream(String userName) {
+        return users.stream()
+                .filter(user -> user.matchName(userName))
+                .findFirst()
+                .orElse(DEFAULT_USER);
+    }
+
+
 }
