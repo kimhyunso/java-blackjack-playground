@@ -3,6 +3,8 @@ package nextstep.optional;
 import nextstep.optional.Computer.Soundcard;
 import nextstep.optional.Computer.USB;
 
+import java.util.Optional;
+
 public class ComputerStore {
     public static final String UNKNOWN_VERSION = "UNKNOWN";
 
@@ -21,6 +23,14 @@ public class ComputerStore {
     }
 
     public static String getVersionOptional(Computer computer) {
-        return null;
+        Optional<Computer> optional = Optional.ofNullable(computer);
+        return optional.stream()
+                .map(Computer::getSoundcard)
+                .filter(item -> item != null)
+                .map(Soundcard::getUsb)
+                .filter(item -> item != null)
+                .map(USB::getVersion)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("잘 못된 데이터입니다."));
     }
 }
