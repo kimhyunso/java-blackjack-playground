@@ -23,14 +23,12 @@ public class ComputerStore {
     }
 
     public static String getVersionOptional(Computer computer) {
-        Optional<Computer> optional = Optional.ofNullable(computer);
-        return optional.stream()
+        return Optional.ofNullable(computer)
                 .map(Computer::getSoundcard)
                 .filter(item -> item != null)
                 .map(Soundcard::getUsb)
                 .filter(item -> item != null)
                 .map(USB::getVersion)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("잘 못된 데이터입니다."));
+                .orElse(ComputerStore.UNKNOWN_VERSION);
     }
 }
