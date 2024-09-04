@@ -1,9 +1,6 @@
 package nextstep.blackjac.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public abstract class Deck {
     protected List<Card> cardList;
@@ -11,7 +8,8 @@ public abstract class Deck {
     protected String cardShape;
 
     protected Deck(String cardShape) {
-        this.cardShape = cardShape;
+        this.cardShape = Optional.ofNullable(cardShape)
+                .orElseThrow(() -> new IllegalArgumentException("카드 모양이 잘 못 되었습니다."));
         cardList = new ArrayList<>();
         init();
         addJoker();

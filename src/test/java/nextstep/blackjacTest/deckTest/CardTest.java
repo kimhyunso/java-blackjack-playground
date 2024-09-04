@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class CardTest {
     private Deck deck;
@@ -31,6 +32,11 @@ public class CardTest {
         initCardList(cardShape);
 
         assertThat(deck.getCardList()).isEqualTo(cardList);
+
+        assertThatThrownBy(() -> {
+            deck = new CloverCard(null);
+        }).isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining("카드 모양이 잘 못 되었습니다.");
     }
 
     @DisplayName("하트 카드 초기화 기능 테스트")
@@ -42,6 +48,11 @@ public class CardTest {
         cardList.add(new Card("Joker", cardShape, 10));
 
         assertThat(deck.getCardList()).isEqualTo(cardList);
+
+        assertThatThrownBy(() -> {
+            deck = new HeartCard(null);
+        }).isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining("카드 모양이 잘 못 되었습니다.");
     }
 
     @DisplayName("다이아몬드 카드 초기화 기능 테스트")
@@ -52,6 +63,11 @@ public class CardTest {
         initCardList(cardShape);
 
         assertThat(deck.getCardList()).isEqualTo(cardList);
+
+        assertThatThrownBy(() -> {
+            deck = new DiamondCard(null);
+        }).isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining("카드 모양이 잘 못 되었습니다.");
     }
 
     @DisplayName("카드 셔플 기능 테스트")
