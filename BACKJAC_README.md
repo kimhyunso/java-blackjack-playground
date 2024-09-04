@@ -7,22 +7,24 @@
 A, 2, 3, 4, 5, 6, 7, 8, 9, 10 + 잭(J, Jack), 퀸(Q, Queen), 킹(K, King) 메이저 카드 = 52장 + 조커 2장  = 54장
 
 - Deck
-1. spadeCard = 13장 + 조커 1장 
+1. spadeCard = 13장 + 조커 1장 [v]
     - cardlist
-2. heartCard = 13장 + 조커 1장
+2. heartCard = 13장 + 조커 1장 [v]
     - cardlist
-3. diamondCard = 13장
+3. diamondCard = 13장 [v]
     - cardlist
-4. cloverCard = 13장
+4. cloverCard = 13장 [v]
     - cardlist
 
-- 셔플기능
+- 셔플기능 [v]
 
 
 - player
 1. UserA
 2. UserB
 3. dealer
+
+- 10000 -> 1칩이라고 가정
 
 
 1. 플레이어는 게임을 시작할 때 배팅 금액을 정해야 한다. 

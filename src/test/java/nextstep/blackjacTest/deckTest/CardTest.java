@@ -1,12 +1,9 @@
 package nextstep.blackjacTest.deckTest;
 
 import nextstep.blackjac.domain.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -14,7 +11,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class CardTest {
     private Deck deck;
     private List<Card> cardList = new ArrayList<>();
-
 
     @DisplayName("스페이드 카드 초기화 기능 테스트")
     @Test
