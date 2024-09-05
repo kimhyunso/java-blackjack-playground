@@ -15,19 +15,18 @@ public class User {
         this.name = name;
     }
 
+    public User(String name, int money) throws IOException {
+        this.name = name;
+        this.money = money;
+        this.userRole = UserRole.getRole(name);
+    }
+
     public User(String name, int money, int hasChip) throws IOException {
         this.name = name;
         this.money = money;
         this.hasChip = hasChip;
         this.userRole = UserRole.getRole(name);
     }
-
-    public User name(String name) {
-        this.name = name;
-        return this;
-    }
-
-
 
     @Override
     public boolean equals(Object o) {
