@@ -2,6 +2,7 @@ package nextstep.blackjac.utils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,7 @@ public class Utils {
     }
 
     public static Object notNullable(Object object) {
+
         return Optional.ofNullable(object)
                 .orElseThrow(() -> new IllegalArgumentException("잘 못된 값입니다."));
     }

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -45,19 +46,10 @@ public class UserTest {
     @DisplayName("유저 이름 중 공백 및 null 허용 금지 기능 테스트")
     @Test
     void userName() {
-
-
-
-
-
         assertThatThrownBy(() -> {
             new Users(null, null);
         }).isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining("잘 못된 값입니다.");
-
-
     }
-
-
 
 }
