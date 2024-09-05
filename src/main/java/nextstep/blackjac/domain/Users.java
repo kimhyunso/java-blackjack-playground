@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Users {
     private List<User> users;
@@ -21,13 +22,21 @@ public class Users {
 
     }
 
-    public Users(String userNames, int money) {
-        Utils.splitName(userNames)
-                .stream()
-                .map(String::length)
-                .filter(item -> item < 0)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("구성 인원이 맞지 않습니다."));
+    public Users(String userNames, List<Integer> money) {
+        List<String> users = Utils.splitName(userNames);
+        userCount(users);
+        money = (List<Integer>) Utils.notNullable(money);
+
+
+        Stream.of(users, money)
+                .peek(item -> System.out.println(item));
+    }
+
+    private void userCount(List<String> users) {
+        long userCount = users.size();
+        if (userCount < 2 || userCount > 8) {
+            throw new IllegalArgumentException("인원 수가 너무 적거나 많습니다.");
+        }
     }
 
     private int givenChip(int money, int wantChip) {
