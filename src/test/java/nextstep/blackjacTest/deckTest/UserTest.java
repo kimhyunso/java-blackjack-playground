@@ -1,55 +1,67 @@
 package nextstep.blackjacTest.deckTest;
 
-import nextstep.blackjac.domain.CloverCard;
 import nextstep.blackjac.domain.Users;
-import nextstep.blackjac.utils.Utils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class UserTest {
 
-    @DisplayName("유저 생성하기")
+    private final String names = "pobi,jason";
+    private List<Integer> money;
+
+    @DisplayName("유저 돈이 없거나 음수일때 기능 테스트")
     @Test
-    void createUser() {
-        final String userNames = "pobi,jason";
-        final int money = 10000;
-
-        // Users users = new Users(userNames, money);
-    }
-
-    @DisplayName("유저 돈 chip으로 교환하는 기능 테스트")
-    @Test
-    void moenyToChip() {
-        final String userNames = "pobi,jason";
-        final int money = 10000;
-
-        int wantChip = 1;
-        new Users(userNames, money, wantChip);
-
-        wantChip = 0;
-        new Users(userNames, money, wantChip);
+    void noHasMoney() {
+        final int pobiMoney = 0;
+        final int pobiJason = 10000;
 
         assertThatThrownBy(() -> {
-            new Users(userNames, money, 2);
+            money = Arrays.asList(pobiMoney, pobiJason);
+            new Users(names, money);
         }).isInstanceOf(IllegalArgumentException.class)
-        .hasMessageContaining("가진 돈 보다 원하는 chip의 갯수가 많습니다.");
+        .hasMessageContaining("배팅 금액이 잘 못 되었습니다.");
     }
 
-    @DisplayName("유저 이름 중 공백 및 null 허용 금지 기능 테스트")
+
+    @DisplayName("유저 이름이 null일 경우 기능 테스트")
     @Test
-    void userName() {
+    void userNameIsNull() {
+        final int pobiMoney = 10000;
+        final int pobiJason = 10000;
+        money = Arrays.asList(pobiMoney, pobiJason);
+
         assertThatThrownBy(() -> {
-            new Users(null, null);
-        }).isInstanceOf(IllegalArgumentException.class)
-        .hasMessageContaining("잘 못된 값입니다.");
+            new Users(null, money);
+        }).isInstanceOf(NullPointerException.class)
+        .hasMessageContaining("이름이 정의되지않았습니다.");
     }
+
+    @DisplayName("유저 이름이 공백일 경우 기능 테스트")
+    @Test
+    void userNameIsEmpty() {
+        final int pobiMoney = 10000;
+        final int pobiJason = 10000;
+        money = Arrays.asList(pobiMoney, pobiJason);
+
+        assertThatThrownBy(() -> {
+            new Users("", money);
+        }).isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining("인원 수가 너무 적거나 많습니다.");
+    }
+
+    @DisplayName("유저 생성 테스트")
+    @Test
+    void createUserTest() {
+        final int pobiMoney = 10000;
+        final int pobiJason = 10000;
+        money = Arrays.asList(pobiMoney, pobiJason);
+
+        Users users = new Users(names, money);
+    }
+
+
 
 }

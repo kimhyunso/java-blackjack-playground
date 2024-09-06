@@ -1,6 +1,8 @@
 package nextstep.blackjac.domain;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class User {
@@ -15,17 +17,15 @@ public class User {
         this.name = name;
     }
 
-    public User(String name, int money) throws IOException {
+    public User(String name, int money) {
         this.name = name;
         this.money = money;
         this.userRole = UserRole.getRole(name);
     }
 
-    public User(String name, int money, int hasChip) throws IOException {
-        this.name = name;
-        this.money = money;
+    public User hasChip(int hasChip) {
         this.hasChip = hasChip;
-        this.userRole = UserRole.getRole(name);
+        return this;
     }
 
     @Override
