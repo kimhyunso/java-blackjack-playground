@@ -1,10 +1,13 @@
 package nextstep.blackjacTest.deckTest;
 
+import nextstep.blackjac.domain.User;
 import nextstep.blackjac.domain.Users;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class UserTest {
@@ -60,8 +63,9 @@ public class UserTest {
         money = Arrays.asList(pobiMoney, pobiJason);
 
         Users users = new Users(names, money);
+        List<User> userList = users.getUsers();
+        assertThat(userList).isEqualTo(Arrays.asList(new User("pobi", 10000), new User("jason", 10000)));
     }
-
 
 
 }

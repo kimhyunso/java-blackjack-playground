@@ -1,10 +1,7 @@
 package nextstep.blackjac.domain;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,11 +18,10 @@ public class CardDeck {
         cloverCardDeck = new CloverCard("clover");
     }
 
-    public List<Card> shuffle() {
+    public Stack<Card> shuffle() {
         List<Card> cardDeck = concat();
         Collections.shuffle(cardDeck);
-
-        return cardDeck;
+        return createDeck(cardDeck);
     }
 
     private List<Card> concat() {
@@ -47,5 +43,9 @@ public class CardDeck {
         cloverCardDeck.shuffle();
     }
 
-
+    private Stack<Card> createDeck(List<Card> shuffleCard) {
+        Stack<Card> cardDeck = new Stack<>();
+        cardDeck.addAll(shuffleCard);
+        return cardDeck;
+    }
 }

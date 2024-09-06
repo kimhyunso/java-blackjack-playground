@@ -2,30 +2,23 @@ package nextstep.blackjac.domain;
 
 import nextstep.blackjac.utils.Utils;
 
-import java.io.IOException;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class Users {
     private List<User> users;
     private static final int CHIP_PRICE = 10000;
 
-    public Users(String userNames, List<Integer> money) throws IOException {
+    public Users(String userNames, List<Integer> money) {
         List<String> splitName = Utils.splitName(userNames);
         checkUserCount(splitName);
-        checkMoney(money, (x) -> x <= 0);
-
-        Map<String, Integer> result = IntStream.range(0, Math.min(splitName.size(), money.size()))
-                .boxed()
-                .collect(Collectors.toMap(splitName::get, money::get));
-
+        checkMoney(money, (hasMoney) -> hasMoney <= 0);
+        Map<String, Integer> result = groupUserNameMoney(splitName, money);
         createUser(result);
     }
 
-    private void createUser(Map<String, Integer> userAndMoney) throws IOException {
+    private void createUser(Map<String, Integer> userAndMoney) {
         users = userAndMoney.entrySet()
                 .stream()
                 .map(entry -> new User(entry.getKey(), entry.getValue()))
@@ -49,9 +42,19 @@ public class Users {
         }
     }
 
+    private Map<String, Integer> groupUserNameMoney(List<String> splitName, List<Integer> money) {
+        return IntStream.range(0, Math.min(splitName.size(), money.size()))
+                .boxed()
+                .collect(Collectors.toMap(splitName::get, money::get));
+    }
+
     private int givenChip(int money, int wantChip) {
         return IntStream.rangeClosed(0, wantChip)
                 .boxed()
                 .reduce(0, (a, b) -> money - (b * money));
+    }
+
+    public List<User> getUsers() {
+        return users;
     }
 }
