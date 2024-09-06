@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -74,9 +75,22 @@ public class CardTest {
     @Test
     void shuffle() {
         CardDeck cardDeck = new CardDeck();
-        List<Card> cards = cardDeck.shuffle();
+        cardDeck.shuffle();
+        Stack<Card> cards = cardDeck.getCardDeck();
         assertThat(cards.size()).isEqualTo(54);
         System.out.println(cards);
+    }
+
+    @DisplayName("카드 2장 받는 기능 테스트")
+    @Test
+    void getCard() {
+        CardDeck cardDeck = new CardDeck();
+        cardDeck.shuffle();
+        Stack<Card> cards = cardDeck.getCardDeck();
+        Card firstCard = cards.pop();
+        Card secondCard = cards.pop();
+        System.out.println(firstCard);
+        System.out.println(secondCard);
     }
 
     private void initCardList(String cardShape) {

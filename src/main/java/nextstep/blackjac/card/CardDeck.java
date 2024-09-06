@@ -10,6 +10,7 @@ public class CardDeck {
     private HeartCard heartCardDeck;
     private DiamondCard diamondCardDeck;
     private CloverCard cloverCardDeck;
+    private Stack<Card> cardDeck;
 
     public CardDeck() {
         spadeCardDeck = new SpadeCard("spade");
@@ -18,10 +19,10 @@ public class CardDeck {
         cloverCardDeck = new CloverCard("clover");
     }
 
-    public Stack<Card> shuffle() {
+    public void shuffle() {
         List<Card> cardDeck = concat();
         Collections.shuffle(cardDeck);
-        return createDeck(cardDeck);
+        cardDeck = createDeck(cardDeck);
     }
 
     private List<Card> concat() {
@@ -44,8 +45,12 @@ public class CardDeck {
     }
 
     private Stack<Card> createDeck(List<Card> shuffleCard) {
-        Stack<Card> cardDeck = new Stack<>();
+        cardDeck = new Stack<Card>();
         cardDeck.addAll(shuffleCard);
+        return cardDeck;
+    }
+
+    public Stack<Card> getCardDeck() {
         return cardDeck;
     }
 }

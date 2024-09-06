@@ -7,4 +7,6 @@ public class Dealer extends User {
         super(name, UserRole.DEALER);
     }
 
+
+
 }

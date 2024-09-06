@@ -24,6 +24,7 @@ public class Users {
                 .stream()
                 .map(entry -> new User(entry.getKey(), entry.getValue()))
                 .collect(Collectors.toList());
+        users.add(new Dealer());
     }
 
     private void checkMoney(List<Integer> money, Condition condition) {
