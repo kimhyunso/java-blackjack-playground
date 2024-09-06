@@ -1,6 +1,6 @@
-package nextstep.blackjac.domain;
+package nextstep.blackjac.card;
 
-public class CloverCard extends Deck {
+public class CloverCard extends Card.Deck {
     public CloverCard(String cardShape) {
         super(cardShape);
     }

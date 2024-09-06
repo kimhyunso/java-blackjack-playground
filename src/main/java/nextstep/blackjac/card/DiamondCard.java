@@ -1,8 +1,6 @@
-package nextstep.blackjac.domain;
+package nextstep.blackjac.card;
 
-import java.util.Optional;
-
-public class DiamondCard extends Deck {
+public class DiamondCard extends Card.Deck {
     public DiamondCard(String cardShape) {
         super(cardShape);
     }

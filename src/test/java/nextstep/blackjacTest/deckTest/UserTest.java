@@ -1,7 +1,9 @@
 package nextstep.blackjacTest.deckTest;
 
-import nextstep.blackjac.domain.User;
-import nextstep.blackjac.domain.Users;
+import nextstep.blackjac.user.Dealer;
+import nextstep.blackjac.user.User;
+import nextstep.blackjac.user.UserRole;
+import nextstep.blackjac.user.Users;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
@@ -65,6 +67,13 @@ public class UserTest {
         Users users = new Users(names, money);
         List<User> userList = users.getUsers();
         assertThat(userList).isEqualTo(Arrays.asList(new User("pobi", 10000), new User("jason", 10000)));
+    }
+
+    @DisplayName("딜러 생성 테스트")
+    @Test
+    void createDealer() {
+        Dealer dealer = new Dealer();
+        assertThat(dealer).isEqualTo(new Dealer());
     }
 
 

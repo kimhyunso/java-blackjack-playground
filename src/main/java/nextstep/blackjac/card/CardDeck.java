@@ -1,4 +1,4 @@
-package nextstep.blackjac.domain;
+package nextstep.blackjac.card;
 
 
 import java.util.*;

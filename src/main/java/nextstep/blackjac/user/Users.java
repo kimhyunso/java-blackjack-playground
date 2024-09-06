@@ -1,5 +1,6 @@
-package nextstep.blackjac.domain;
+package nextstep.blackjac.user;
 
+import nextstep.blackjac.domain.Condition;
 import nextstep.blackjac.utils.Utils;
 
 import java.util.*;

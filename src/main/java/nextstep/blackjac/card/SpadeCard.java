@@ -1,7 +1,7 @@
-package nextstep.blackjac.domain;
+package nextstep.blackjac.card;
 
-public class HeartCard extends Deck {
-    public HeartCard(String cardShape) {
+public class SpadeCard extends Card.Deck {
+    public SpadeCard(String cardShape) {
         super(cardShape);
     }
 
@@ -9,4 +9,5 @@ public class HeartCard extends Deck {
     void addJoker() {
         cardList.add(new Card("Joker", cardShape, 10));
     }
+
 }
