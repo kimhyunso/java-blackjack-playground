@@ -66,7 +66,7 @@ public class UserTest {
 
         Users users = new Users(names, money);
         List<User> userList = users.getUsers();
-        assertThat(userList).isEqualTo(Arrays.asList(new User("pobi", 10000), new User("jason", 10000)));
+        assertThat(userList).isEqualTo(Arrays.asList(new User("pobi", 10000), new User("jason", 10000), new Dealer()));
     }
 
     @DisplayName("딜러 생성 테스트")
