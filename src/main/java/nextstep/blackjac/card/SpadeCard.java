@@ -1,6 +1,6 @@
 package nextstep.blackjac.card;
 
-public class SpadeCard extends Card.Deck {
+public class SpadeCard extends Deck {
     public SpadeCard(String cardShape) {
         super(cardShape);
     }

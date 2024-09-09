@@ -11,7 +11,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class CardTest {
-    private Card.Deck deck;
+    private Deck deck;
     private List<Card> cardList = new ArrayList<>();
 
     @DisplayName("스페이드 카드 초기화 기능 테스트")
