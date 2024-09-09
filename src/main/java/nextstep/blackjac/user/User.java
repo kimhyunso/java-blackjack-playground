@@ -50,11 +50,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", money=" + money +
-                ", chip=" + chip +
-                ", userRole=" + userRole +
-                '}';
+        return name;
     }
 }

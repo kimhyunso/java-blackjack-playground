@@ -34,28 +34,25 @@ public class BlackJacView {
 
     public void givenCard(String userNames, List<User> users) {
         System.out.println("딜러," + userNames + "에게 각각 2장의 카드를 나누어 주었습니다.");
-        int count = 0;
-        String names[] = userNames.split(",");
-
         for (User user : users) {
-            if (user instanceof Dealer) {
-                System.out.println("딜러: " + user.getGivenCardList());
-            } else {
-                System.out.println(names[count] + ": " + user.getGivenCardList());
-                count++;
-            }
+            getUserCardList(user);
         }
     }
 
-    public String givenMoreCard(List<User> users) {
+    public User givenMoreCard(List<User> users) {
         for (User user : users) {
-            System.out.println(name + "는 한장의 카드를 더 받겠습니까?");
+            System.out.println(user + "는 한장의 카드를 더 받겠습니까?");
             String moreCard = input.nextLine();
-            System.out.println(name + "카드: " + cards);
+            if (moreCard.equalsIgnoreCase("y")) {
+                return user;
+            }
         }
+        return null;
+    }
 
-
-        return moreCard;
+    public void getUserCardList(User user) {
+        List<Card> cards = user.getGivenCardList();
+        System.out.println(user + ": " + cards);
     }
 
     public boolean endGame() {
