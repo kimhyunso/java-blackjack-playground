@@ -32,7 +32,8 @@ public class UserController {
             users.givenCards(shuffleCardDeck);
             blackJacView.givenCard(names, userList);
 
-            blackJacView.givenMoreCard();
+            User user = blackJacView.givenMoreCard(userList);
+
 
 
             if (blackJacView.endGame()) {
