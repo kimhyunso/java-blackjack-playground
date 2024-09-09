@@ -1,5 +1,9 @@
 package nextstep.blackjac.user;
 
+import nextstep.blackjac.card.Card;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class User {
@@ -7,6 +11,7 @@ public class User {
     private int money;
     private Chip chip;
     private UserRole userRole;
+    private List<Card> givenCardList = new ArrayList<>();
 
     public User() {}
 
@@ -21,6 +26,14 @@ public class User {
         this.userRole = UserRole.getRole(name);
     }
 
+    public User givenCardList(Card card) {
+        givenCardList.add(card);
+        return this;
+    }
+
+    public List<Card> getGivenCardList() {
+        return givenCardList;
+    }
 
     @Override
     public boolean equals(Object object) {

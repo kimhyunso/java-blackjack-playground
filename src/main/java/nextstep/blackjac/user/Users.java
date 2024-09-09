@@ -1,5 +1,6 @@
 package nextstep.blackjac.user;
 
+import nextstep.blackjac.card.Card;
 import nextstep.blackjac.domain.Condition;
 import nextstep.blackjac.utils.Utils;
 
@@ -48,6 +49,13 @@ public class Users {
         return IntStream.range(0, Math.min(splitName.size(), money.size()))
                 .boxed()
                 .collect(Collectors.toMap(splitName::get, money::get));
+    }
+
+    public void givenCards(Stack<Card> cardDeck) {
+        for (User user : users) {
+            user.givenCardList(cardDeck.pop());
+            user.givenCardList(cardDeck.pop());
+        }
     }
 
     private int givenChip(int money, int wantChip) {

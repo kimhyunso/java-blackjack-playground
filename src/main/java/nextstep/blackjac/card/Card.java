@@ -38,10 +38,6 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card{" +
-                "cardPosition='" + cardName + '\'' +
-                ", cardShape='" + cardShape + '\'' +
-                ", cardNumber=" + cardNumber +
-                '}';
+        return cardNumber + cardShape;
     }
 }
