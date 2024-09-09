@@ -5,6 +5,7 @@ import nextstep.blackjac.card.Card;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class User {
     private String name;
@@ -21,7 +22,11 @@ public class User {
     }
 
     public User(String name, int money) {
-        this.name = name;
+        this.name = Optional.ofNullable(name)
+                .orElseThrow(() -> new NullPointerException("이름이 비어 있거나 Null입니다."));
+        if (money <= 0) {
+            throw new IllegalArgumentException("배팅 금액이 너무 작습니다.");
+        }
         this.money = money;
         this.userRole = UserRole.getRole(name);
     }
