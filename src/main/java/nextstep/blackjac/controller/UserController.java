@@ -23,7 +23,7 @@ public class UserController {
             String names = blackJacView.joinPeople();
             List<String> userNames = Utils.splitName(names);
             List<Integer> money = blackJacView.batting(userNames);
-            users = new Users(names, money);
+            users = new Users(userNames, money);
             List<User> userList = users.getUsers();
 
             cardDeck.shuffle();
@@ -32,9 +32,8 @@ public class UserController {
             users.givenCards(shuffleCardDeck);
             blackJacView.givenCard(names, userList);
 
-            User user = blackJacView.givenMoreCard(userList);
-
-
+            User user = blackJacView.givenMoreCard(userList, shuffleCardDeck);
+            blackJacView.getUserCardList(user);
 
             if (blackJacView.endGame()) {
                 break;

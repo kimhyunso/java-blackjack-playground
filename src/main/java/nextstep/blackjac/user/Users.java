@@ -12,12 +12,22 @@ public class Users {
     private List<User> users;
     private static final int CHIP_PRICE = 10000;
 
-    public Users(String userNames, List<Integer> money) {
-        List<String> splitName = Utils.splitName(userNames);
-        checkUserCount(splitName);
+    public Users(List<String> names, List<Integer> money) {
+        checkUserCount(names);
         checkMoney(money, (hasMoney) -> hasMoney <= 0);
-        Map<String, Integer> result = groupUserNameMoney(splitName, money);
+        Map<String, Integer> result = groupUserNameMoney(names, money);
         createUser(result);
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void givenCards(Stack<Card> cardDeck) {
+        for (User user : users) {
+            user.givenCardList(cardDeck.pop());
+            user.givenCardList(cardDeck.pop());
+        }
     }
 
     private void createUser(Map<String, Integer> userAndMoney) {
@@ -45,26 +55,15 @@ public class Users {
         }
     }
 
-    private Map<String, Integer> groupUserNameMoney(List<String> splitName, List<Integer> money) {
-        return IntStream.range(0, Math.min(splitName.size(), money.size()))
+    private Map<String, Integer> groupUserNameMoney(List<String> userName, List<Integer> money) {
+        return IntStream.range(0, Math.min(userName.size(), money.size()))
                 .boxed()
-                .collect(Collectors.toMap(splitName::get, money::get));
-    }
-
-    public void givenCards(Stack<Card> cardDeck) {
-        for (User user : users) {
-            user.givenCardList(cardDeck.pop());
-            user.givenCardList(cardDeck.pop());
-        }
+                .collect(Collectors.toMap(userName::get, money::get));
     }
 
     private int givenChip(int money, int wantChip) {
         return IntStream.rangeClosed(0, wantChip)
                 .boxed()
                 .reduce(0, (a, b) -> money - (b * money));
-    }
-
-    public List<User> getUsers() {
-        return users;
     }
 }

@@ -39,11 +39,14 @@ public class BlackJacView {
         }
     }
 
-    public User givenMoreCard(List<User> users) {
+    public User givenMoreCard(List<User> users, Stack<Card> cardDeck) {
         for (User user : users) {
             System.out.println(user + "는 한장의 카드를 더 받겠습니까?");
-            String moreCard = input.nextLine();
+            String moreCard = input.next();
+            List<Card> userCard = user.getGivenCardList();
+
             if (moreCard.equalsIgnoreCase("y")) {
+                userCard.add(cardDeck.pop());
                 return user;
             }
         }

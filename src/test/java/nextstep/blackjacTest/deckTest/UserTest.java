@@ -4,6 +4,7 @@ import nextstep.blackjac.user.Dealer;
 import nextstep.blackjac.user.User;
 import nextstep.blackjac.user.UserRole;
 import nextstep.blackjac.user.Users;
+import nextstep.blackjac.utils.Utils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
@@ -22,10 +23,11 @@ public class UserTest {
     void noHasMoney() {
         final int pobiMoney = 0;
         final int pobiJason = 10000;
+        List<String> userName = Utils.splitName(names);
 
         assertThatThrownBy(() -> {
             money = Arrays.asList(pobiMoney, pobiJason);
-            new Users(names, money);
+            new Users(userName, money);
         }).isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining("배팅 금액이 잘 못 되었습니다.");
     }
@@ -50,9 +52,10 @@ public class UserTest {
         final int pobiMoney = 10000;
         final int pobiJason = 10000;
         money = Arrays.asList(pobiMoney, pobiJason);
+        List<String> names = Arrays.asList("", "");
 
         assertThatThrownBy(() -> {
-            new Users("", money);
+            new Users(names, money);
         }).isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining("인원 수가 너무 적거나 많습니다.");
     }
@@ -63,8 +66,9 @@ public class UserTest {
         final int pobiMoney = 10000;
         final int pobiJason = 10000;
         money = Arrays.asList(pobiMoney, pobiJason);
+        List<String> userName = Utils.splitName(names);
 
-        Users users = new Users(names, money);
+        Users users = new Users(userName, money);
         List<User> userList = users.getUsers();
         assertThat(userList).isEqualTo(Arrays.asList(new User("pobi", 10000), new User("jason", 10000), new Dealer()));
     }
