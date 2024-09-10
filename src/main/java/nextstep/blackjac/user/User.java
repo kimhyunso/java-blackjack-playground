@@ -2,10 +2,7 @@ package nextstep.blackjac.user;
 
 import nextstep.blackjac.card.Card;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -48,29 +45,6 @@ public class User {
                 .reduce(0, Integer::sum);
     }
 
-    public int compareCarNumber(User user) {
-        int myCardNumberTotal = this.cardNumberTotal();
-        int targetCardNumberTotal = user.cardNumberTotal();
-
-        if (myCardNumberTotal > targetCardNumberTotal) {
-            return this.money + user.money;
-        }
-
-        if (myCardNumberTotal == targetCardNumberTotal) {
-            return this.money;
-        }
-
-        return 0;
-    }
-
-    public User givenMoney(User user) {
-        if (user != null) {
-            this.money += user.money;
-            user.money = 0;
-        }
-
-        return this;
-    }
 
     @Override
     public boolean equals(Object object) {

@@ -1,5 +1,6 @@
 package nextstep.blackjac.view;
 
+import com.sun.org.apache.xml.internal.utils.res.XResourceBundle;
 import nextstep.blackjac.Main;
 import nextstep.blackjac.card.Card;
 import nextstep.blackjac.card.CardDeck;
@@ -8,10 +9,8 @@ import nextstep.blackjac.user.User;
 import nextstep.blackjac.user.Users;
 import nextstep.blackjac.utils.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class BlackJacView {
     private Scanner input = new Scanner(System.in);
@@ -84,13 +83,26 @@ public class BlackJacView {
 
     public void finalPayment(List<User> users) {
         System.out.println("## 최종수익");
-        int result = 0;
-        for (User user : users) {
-            for (User target : users) {
-                result = user.compareCarNumber(target);
-            }
-            System.out.println(user + ": " + result);
-        }
+        int lost = users.stream()
+                .map(User::cardNumberTotal)
+                .mapToInt(Integer::new)
+                .min()
+                .orElseThrow(NoSuchElementException::new);
+
+        User user = users.stream()
+                .filter(item -> item.cardNumberTotal() == lost)
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
+
+
+
+    }
+
+    public int compareCarNumber(List<Integer> cardNumberTotals) {
+        return cardNumberTotals.stream()
+                .mapToInt(Integer::new)
+                .min()
+                .orElseThrow(NoSuchElementException::new);
     }
 
 }
