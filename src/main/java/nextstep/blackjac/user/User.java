@@ -53,14 +53,14 @@ public class User {
         int targetCardNumberTotal = user.cardNumberTotal();
 
         if (myCardNumberTotal > targetCardNumberTotal) {
-            return myCardNumberTotal;
+            return this.money + user.money;
         }
 
         if (myCardNumberTotal == targetCardNumberTotal) {
-            return myCardNumberTotal;
+            return this.money;
         }
 
-        return targetCardNumberTotal;
+        return 0;
     }
 
     public User givenMoney(User user) {
