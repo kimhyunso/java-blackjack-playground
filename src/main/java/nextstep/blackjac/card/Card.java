@@ -23,6 +23,10 @@ public class Card {
         this.cardNumber = cardNumber;
     }
 
+    public int cardNumberTotal(Card card) {
+        return card.cardNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

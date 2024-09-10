@@ -41,6 +41,11 @@ public class BlackJacView {
 
     public User givenMoreCard(List<User> users, Stack<Card> cardDeck) {
         for (User user : users) {
+            if (user instanceof Dealer) {
+                givenCardToDealer(user, cardDeck);
+                continue;
+            }
+
             System.out.println(user + "는 한장의 카드를 더 받겠습니까?");
             String moreCard = input.next();
             List<Card> userCard = user.getGivenCardList();
@@ -62,6 +67,16 @@ public class BlackJacView {
         System.out.println("게임을 종료하시겠습니까? (y,n)");
         String endGame = input.next();
         return endGame.equalsIgnoreCase("y");
+    }
+
+    public void givenCardToDealer(User user, Stack<Card> cardDeck) {
+        int total = user.cardNumberTotal();
+        List<Card> userCards = user.getGivenCardList();
+
+        if (total <= Dealer.AUTO_GIVEN_CARD) {
+            System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.");
+            userCards.add(cardDeck.pop());
+        }
     }
 
 }

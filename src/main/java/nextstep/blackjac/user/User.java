@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class User {
     private String name;
@@ -40,6 +42,12 @@ public class User {
         return givenCardList;
     }
 
+    public int cardNumberTotal() {
+        return givenCardList.stream()
+                .map(item -> item.cardNumberTotal(item))
+                .reduce(0, Integer::sum);
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -57,4 +65,5 @@ public class User {
     public String toString() {
         return name;
     }
+
 }
