@@ -18,7 +18,7 @@ public class BlackJacView {
 
     public String joinPeople() {
         System.out.println("게임에 참여할 사람의 이름을 입력하세요.(쉼표 기준으로 분리)");
-        String userNames = input.nextLine();
+        String userNames = input.next();
         return userNames;
     }
 
@@ -27,6 +27,7 @@ public class BlackJacView {
         for (String name : userNames) {
             System.out.println(name + "의 배팅 금액은?");
             money.add(input.nextInt());
+            input.nextLine();
         }
 
         return money;
@@ -34,12 +35,10 @@ public class BlackJacView {
 
     public void givenCard(String userNames, List<User> users) {
         System.out.println("딜러," + userNames + "에게 각각 2장의 카드를 나누어 주었습니다.");
-        for (User user : users) {
-            getUserCardList(user);
-        }
+        getUserCardList(users);
     }
 
-    public User givenMoreCard(List<User> users, Stack<Card> cardDeck) {
+    public void givenMoreCard(List<User> users, Stack<Card> cardDeck) {
         for (User user : users) {
             if (user instanceof Dealer) {
                 givenCardToDealer(user, cardDeck);
@@ -52,15 +51,19 @@ public class BlackJacView {
 
             if (moreCard.equalsIgnoreCase("y")) {
                 userCard.add(cardDeck.pop());
-                return user;
             }
         }
-        return null;
+        getUserCardList(users);
     }
 
-    public void getUserCardList(User user) {
-        List<Card> cards = user.getGivenCardList();
-        System.out.println(user + ": " + cards);
+    public void getUserCardList(List<User> users) {
+        for (User user : users) {
+            List<Card> cards = user.getGivenCardList();
+            int result = user.cardNumberTotal();
+
+            System.out.println(user + ": " + cards + " 결과 - " + result);
+        }
+
     }
 
     public boolean endGame() {
@@ -76,6 +79,17 @@ public class BlackJacView {
         if (total <= Dealer.AUTO_GIVEN_CARD) {
             System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.");
             userCards.add(cardDeck.pop());
+        }
+    }
+
+    public void finalPayment(List<User> users) {
+        System.out.println("## 최종수익");
+        int result = 0;
+        for (User user : users) {
+            for (User target : users) {
+                result = user.compareCarNumber(target);
+            }
+            System.out.println(user + ": " + result);
         }
     }
 

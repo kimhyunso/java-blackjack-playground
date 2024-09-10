@@ -14,7 +14,6 @@ public class Users {
 
     public Users(List<String> names, List<Integer> money) {
         checkUserCount(names);
-        checkMoney(money, (hasMoney) -> hasMoney <= 0);
         Map<String, Integer> result = groupUserNameMoney(names, money);
         createUser(result);
     }
@@ -36,16 +35,6 @@ public class Users {
                 .map(entry -> new User(entry.getKey(), entry.getValue()))
                 .collect(Collectors.toList());
         users.add(new Dealer());
-    }
-
-    private void checkMoney(List<Integer> money, Condition condition) {
-        long count = money.stream()
-                .filter(condition::condition)
-                .count();
-
-        if (count > 0) {
-            throw new IllegalArgumentException("배팅 금액이 잘 못 되었습니다.");
-        }
     }
 
     private void checkUserCount(List<String> users) {

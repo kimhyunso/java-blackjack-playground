@@ -48,6 +48,30 @@ public class User {
                 .reduce(0, Integer::sum);
     }
 
+    public int compareCarNumber(User user) {
+        int myCardNumberTotal = this.cardNumberTotal();
+        int targetCardNumberTotal = user.cardNumberTotal();
+
+        if (myCardNumberTotal > targetCardNumberTotal) {
+            return myCardNumberTotal;
+        }
+
+        if (myCardNumberTotal == targetCardNumberTotal) {
+            return myCardNumberTotal;
+        }
+
+        return targetCardNumberTotal;
+    }
+
+    public User givenMoney(User user) {
+        if (user != null) {
+            this.money += user.money;
+            user.money = 0;
+        }
+
+        return this;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -65,5 +89,4 @@ public class User {
     public String toString() {
         return name;
     }
-
 }
