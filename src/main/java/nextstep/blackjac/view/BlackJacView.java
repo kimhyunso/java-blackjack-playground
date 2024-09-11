@@ -1,14 +1,8 @@
 package nextstep.blackjac.view;
 
-import com.sun.org.apache.xml.internal.utils.res.XResourceBundle;
-import nextstep.blackjac.Main;
 import nextstep.blackjac.card.Card;
-import nextstep.blackjac.card.CardDeck;
 import nextstep.blackjac.user.Dealer;
 import nextstep.blackjac.user.User;
-import nextstep.blackjac.user.Users;
-import nextstep.blackjac.utils.Utils;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -85,14 +79,24 @@ public class BlackJacView {
         System.out.println("## 최종수익");
         int lost = users.stream()
                 .map(User::cardNumberTotal)
-                .mapToInt(Integer::new)
+                .mapToInt(Integer::intValue)
                 .min()
                 .orElseThrow(NoSuchElementException::new);
 
-        User user = users.stream()
+        User loseUser = users.stream()
                 .filter(item -> item.cardNumberTotal() == lost)
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
+
+        List<User> winUsers = users.
+                stream()
+                .filter(item -> item.cardNumberTotal() != lost)
+                .collect(Collectors.toList());
+
+        winUsers.stream()
+                .map(item -> item.payment(loseUser, users.size()));
+
+
 
 
 

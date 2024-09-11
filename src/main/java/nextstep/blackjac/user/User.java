@@ -45,6 +45,9 @@ public class User {
                 .reduce(0, Integer::sum);
     }
 
+    public int payment(User loseUser, int userCount) {
+        return this.money += (loseUser.money / (userCount - 1));
+    }
 
     @Override
     public boolean equals(Object object) {
