@@ -6,24 +6,6 @@
 ♠♥♦♣ 네 수트(문양)
 A, 2, 3, 4, 5, 6, 7, 8, 9, 10 + 잭(J, Jack), 퀸(Q, Queen), 킹(K, King) 메이저 카드 = 52장 + 조커 2장  = 54장
 
-- Deck
-1. spadeCard = 13장 + 조커 1장 [v]
-    - cardlist
-2. heartCard = 13장 + 조커 1장 [v]
-    - cardlist
-3. diamondCard = 13장 [v]
-    - cardlist
-4. cloverCard = 13장 [v]
-    - cardlist
-
-- 셔플기능 [v]
-
-- player
-1. UserA [v]
-2. UserB [v]
-3. dealer [v]
-
-- 10000 -> 1칩이라고 가정
 
 1. 플레이어는 게임을 시작할 때 배팅 금액을 정해야 한다. 
 2. 카드의 숫자 계산은 카드 숫자를 기본으로 하며, 예외로 Ace는 1 또는 11로 계산할 수 있으며, King, Queen, Jack은 각각 10으로 계산한다. [v]
