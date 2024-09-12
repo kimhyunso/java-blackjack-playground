@@ -77,34 +77,11 @@ public class BlackJacView {
 
     public void finalPayment(List<User> users) {
         System.out.println("## 최종수익");
-        int lost = users.stream()
-                .map(User::cardNumberTotal)
-                .mapToInt(Integer::intValue)
-                .min()
-                .orElseThrow(NoSuchElementException::new);
-
-        User loseUser = users.stream()
-                .filter(item -> item.cardNumberTotal() == lost)
-                .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
-
-        List<User> winUsers = users.
-                stream()
-                .filter(item -> item.cardNumberTotal() != lost)
-                .collect(Collectors.toList());
-
-        winUsers.stream()
-                .map(item -> item.payment(loseUser, users.size()));
-
-
-
-
-
     }
 
     public int compareCarNumber(List<Integer> cardNumberTotals) {
         return cardNumberTotals.stream()
-                .mapToInt(Integer::new)
+                .mapToInt(Integer::intValue)
                 .min()
                 .orElseThrow(NoSuchElementException::new);
     }
